@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoNova - Redefining Car Experience</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav id="navbar" class="glass-effect">
+        <div class="logo">Auto<span>Nova</span></div>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#catalog">Catalog</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#booking">Book</a></li>
+        </ul>
+        <div class="menu-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero parallax-effect">
+        <h1 class="animated-slogan">Drive the Future</h1>
+        <p>Experience innovation in every journey</p>
+        <a href="#catalog" class="cta-button neon-effect">Explore Our Fleet</a>
+      </section>
+
+      <section id="about" class="about wave-bg">
+        <h2>Revolutionizing Automotive Excellence</h2>
+        <p class="fade-in">
+          At AutoNova, we're not just selling cars; we're crafting experiences.
+          With cutting-edge technology and unparalleled service, we're
+          redefining what it means to own and maintain a vehicle in the modern
+          era.
+        </p>
+      </section>
+
+      <section id="catalog" class="catalog">
+        <h2>Our Innovative Fleet</h2>
+        <div class="car-grid">
+          <!-- Car cards will be dynamically generated here -->
+        </div>
+      </section>
+
+      <section id="services" class="services gradient-bg">
+        <h2>Cutting-Edge Services</h2>
+        <div class="service-grid">
+          <div class="service-card glass-effect">
+            <i class="fas fa-tools"></i>
+            <h3>AI-Powered Diagnostics</h3>
+            <p>Advanced AI systems for precise problem identification</p>
+          </div>
+          <div class="service-card glass-effect">
+            <i class="fas fa-car-battery"></i>
+            <h3>Eco-Friendly Upgrades</h3>
+            <p>Transform your vehicle with sustainable enhancements</p>
+          </div>
+          <div class="service-card glass-effect">
+            <i class="fas fa-cog"></i>
+            <h3>Smart Maintenance</h3>
+            <p>IoT-enabled preventive care for your vehicle</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="booking" class="booking wave-bg">
+        <h2>Schedule Your Innovation</h2>
+        <form id="appointment-form" class="glass-effect">
+          <input type="text" id="name" placeholder="Your Name" required />
+          <input type="email" id="email" placeholder="Your Email" required />
+          <input type="tel" id="phone" placeholder="Your Phone" required />
+          <select id="service-type" required>
+            <option value="">Select Service</option>
+            <option value="ai-diagnostics">AI-Powered Diagnostics</option>
+            <option value="eco-upgrade">Eco-Friendly Upgrades</option>
+            <option value="smart-maintenance">Smart Maintenance</option>
+          </select>
+          <input type="date" id="appointment-date" required />
+          <textarea id="message" placeholder="Additional Details"></textarea>
+          <button type="submit" class="neon-effect">Book Now</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="glass-effect">
+      <p>&copy; 2023 AutoNova. Driving innovation forward.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
