@@ -1,238 +1,220 @@
 // Navbar functionality
-const navbar = document.getElementById("navbar");
-const menuToggle = document.querySelector(".menu-toggle");
+const navbar = document.getElementById('navbar');
+const menuToggle = document.querySelector('.menu-toggle');
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
-    navbar.style.background = "rgba(18, 18, 18, 0.8)";
-  } else {
-    navbar.style.background = "transparent";
-  }
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(0, 0, 0, 0.8)';
+    } else {
+        navbar.style.background = 'transparent';
+    }
 });
 
-menuToggle.addEventListener("click", () => {
-  navbar.classList.toggle("active");
+menuToggle.addEventListener('click', () => {
+    navbar.classList.toggle('active');
+});
+
+// Custom cursor
+const cursor = document.querySelector('.cursor');
+const cursorFollower = document.querySelector('.cursor-follower');
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    
+    setTimeout(() => {
+        cursorFollower.style.left = e.clientX + 'px';
+        cursorFollower.style.top = e.clientY + 'px';
+    }, 50);
 });
 
 // Smooth scrolling
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute("href")).scrollIntoView({
-      behavior: "smooth",
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
     });
-  });
 });
 
-// Fade-in animation for About section
-const fadeElements = document.querySelectorAll(".fade-in");
+// Fade-in animation for elements
+const fadeElements = document.querySelectorAll('.fade-in');
 
-const fadeInObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        entry.target.style.opacity = "1";
-        entry.target.style.transform = "translateY(0)";
-      }
+const fadeInObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
     });
-  },
-  { threshold: 0.5 }
-);
+}, { threshold: 0.5 
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.5 });
 
-fadeElements.forEach((element) => {
-  fadeInObserver.observe(element);
+fadeElements.forEach(element => {
+    fadeInObserver.observe(element);
+});
+
+// Animated counter for stats
+const stats = document.querySelectorAll('.stat-number');
+
+stats.forEach(stat => {
+    const target = parseInt(stat.getAttribute('data-target'));
+    const increment = target / 200;
+
+    const updateCounter = () => {
+        const value = parseInt(stat.innerText);
+        if (value < target) {
+            stat.innerText = Math.ceil(value + increment);
+            setTimeout(updateCounter, 1);
+        } else {
+            stat.innerText = target;
+        }
+    };
+
+    updateCounter();
 });
 
 // Car catalog
 const carData = [
-  {
-    name: "Electric Supercar",
-    price: "$150,000",
-    image: "https://source.unsplash.com/random/400x300/?electric-supercar",
-  },
-  {
-    name: "Autonomous SUV",
-    price: "$85,000",
-    image: "https://source.unsplash.com/random/400x300/?autonomous-suv",
-  },
-  {
-    name: "Hydrogen Sedan",
-    price: "$70,000",
-    image: "https://source.unsplash.com/random/400x300/?hydrogen-car",
-  },
-  {
-    name: "Flying Car Prototype",
-    price: "$500,000",
-    image: "https://source.unsplash.com/random/400x300/?flying-car",
-  },
-  {
-    name: "Amphibious Vehicle",
-    price: "$120,000",
-    image: "https://source.unsplash.com/random/400x300/?amphibious-car",
-  },
-  {
-    name: "Solar-Powered Compact",
-    price: "$45,000",
-    image: "https://source.unsplash.com/random/400x300/?solar-car",
-  },
+    { name: 'Quantum Surge EV', price: '$250,000', image: 'https://source.unsplash.com/random/400x300/?electric-supercar' },
+    { name: 'NeuroDrive Autonomous', price: '$180,000', image: 'https://source.unsplash.com/random/400x300/?autonomous-car' },
+    { name: 'Fusion X Hybrid', price: '$120,000', image: 'https://source.unsplash.com/random/400x300/?hybrid-car' },
+    { name: 'Nebula GT', price: '$350,000', image: 'https://source.unsplash.com/random/400x300/?futuristic-sports-car' },
+    { name: 'Eco Voyager', price: '$90,000', image: 'https://source.unsplash.com/random/400x300/?eco-friendly-car' },
+    { name: 'Stellar X', price: '$280,000', image: 'https://source.unsplash.com/random/400x300/?luxury-electric-car' }
 ];
 
-const carGrid = document.querySelector(".car-grid");
+const carGrid = document.querySelector('.car-grid');
 
-carData.forEach((car) => {
-  const carCard = document.createElement("div");
-  carCard.classList.add("car-card", "glass-effect");
-  carCard.innerHTML = `
+carData.forEach(car => {
+    const carCard = document.createElement('div');
+    carCard.classList.add('car-card', 'glass-effect');
+    carCard.innerHTML = `
         <img src="${car.image}" alt="${car.name}" class="car-image">
         <div class="car-details">
             <h3>${car.name}</h3>
             <p class="car-price">${car.price}</p>
         </div>
     `;
-  carGrid.appendChild(carCard);
-
-  // Add hover effect to change image
-  const carImage = carCard.querySelector(".car-image");
-  const originalSrc = carImage.src;
-  carCard.addEventListener("mouseenter", () => {
-    carImage.style.transform = "scale(1.1)";
-    setTimeout(() => {
-      carImage.src = `https://source.unsplash.com/random/400x300/?${car.name.toLowerCase()}-interior`;
-    }, 300);
-  });
-  carCard.addEventListener("mouseleave", () => {
-    carImage.style.transform = "scale(1)";
-    setTimeout(() => {
-      carImage.src = originalSrc;
-    }, 300);
-  });
-
-  // Add click event to reveal details
-  carCard.addEventListener("click", () => {
-    const modal = document.createElement("div");
-    modal.classList.add("modal", "glass-effect");
-    modal.innerHTML = `
-            <div class="modal-content">
-                <h2>${car.name}</h2>
-                <p>Price: ${car.price}</p>
-                <p>Experience the future of automotive technology with our ${car.name.toLowerCase()}. This cutting-edge vehicle combines style, performance, and innovation to deliver an unparalleled driving experience.</p>
-                <button class="close-modal neon-effect">Close</button>
-            </div>
-        `;
-    document.body.appendChild(modal);
-
-    modal.querySelector(".close-modal").addEventListener("click", () => {
-      modal.remove();
-    });
-  });
+    carGrid.appendChild(carCard);
 });
 
 // Form validation with enhanced UX
-const appointmentForm = document.getElementById("appointment-form");
+const appointmentForm = document.getElementById('appointment-form');
 
-appointmentForm.addEventListener("submit", (e) => {
-  e.preventDefault();
+appointmentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-  const name = document.getElementById("name");
-  const email = document.getElementById("email");
-  const phone = document.getElementById("phone");
-  const serviceType = document.getElementById("service-type");
-  const appointmentDate = document.getElementById("appointment-date");
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    const serviceType = document.getElementById('service-type');
+    const appointmentDate = document.getElementById('appointment-date');
 
-  const fields = [name, email, phone, serviceType, appointmentDate];
-  let isValid = true;
+    const fields = [name, email, phone, serviceType, appointmentDate];
+    let isValid = true;
 
-  fields.forEach((field) => {
-    if (!field.value) {
-      isValid = false;
-      field.classList.add("error");
-      field.addEventListener("input", () => field.classList.remove("error"));
+    fields.forEach(field => {
+        if (!field.value) {
+            isValid = false;
+            field.classList.add('error');
+            field.addEventListener('input', () => field.classList.remove('error'));
+        }
+    });
+
+    if (!isValid) {
+        showNotification('Please fill in all required fields.', 'error');
+        return;
     }
-  });
 
-  if (!isValid) {
-    showNotification("Please fill in all required fields.", "error");
-    return;
-  }
+    // Simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value)) {
+        showNotification('Please enter a valid email address.', 'error');
+        email.classList.add('error');
+        return;
+    }
 
-  // Simple email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email.value)) {
-    showNotification("Please enter a valid email address.", "error");
-    email.classList.add("error");
-    return;
-  }
+    // Simple phone validation (10 digits)
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phone.value)) {
+        showNotification('Please enter a valid 10-digit phone number.', 'error');
+        phone.classList.add('error');
+        return;
+    }
 
-  // Simple phone validation (10 digits)
-  const phoneRegex = /^\d{10}$/;
-  if (!phoneRegex.test(phone.value)) {
-    showNotification("Please enter a valid 10-digit phone number.", "error");
-    phone.classList.add("error");
-    return;
-  }
-
-  // If all validations pass, show success message and reset form
-  showNotification(
-    "Appointment booked successfully! We will contact you soon.",
-    "success"
-  );
-  appointmentForm.reset();
+    // If all validations pass, show success message and reset form
+    showNotification('Appointment booked successfully! We will contact you soon.', 'success');
+    appointmentForm.reset();
 });
 
 function showNotification(message, type) {
-  const notification = document.createElement("div");
-  notification.classList.add("notification", type);
-  notification.textContent = message;
-  document.body.appendChild(notification);
+    const notification = document.createElement('div');
+    notification.classList.add('notification', type);
+    notification.textContent = message;
+    document.body.appendChild(notification);
 
-  setTimeout(() => {
-    notification.classList.add("show");
     setTimeout(() => {
-      notification.classList.remove("show");
-      setTimeout(() => notification.remove(), 300);
-    }, 3000);
-  }, 100);
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }, 100);
 }
 
-// Parallax scrolling effect for the hero section
-window.addEventListener("scroll", () => {
-  const heroSection = document.querySelector(".hero");
-  const scrollPosition = window.pageYOffset;
-  heroSection.style.backgroundPositionY = `${scrollPosition * 0.7}px`;
+// GSAP Animations
+gsap.registerPlugin(ScrollTrigger);
+
+// Animate hero content
+gsap.from('.hero-content', {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    ease: 'power3.out'
 });
 
-// Add a typing effect to the hero title
-const heroTitle = document.querySelector(".animated-slogan");
-const text = heroTitle.textContent;
-heroTitle.textContent = "";
-let i = 0;
-
-function typeWriter() {
-  if (i < text.length) {
-    heroTitle.textContent += text.charAt(i);
-    i++;
-    setTimeout(typeWriter, 100);
-  }
-}
-
-typeWriter();
-
-// Add scroll-triggered animations to sections
-const sections = document.querySelectorAll("section");
-
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("animate");
-        sectionObserver.unobserve(entry.target);
-      }
+// Animate sections
+gsap.utils.toArray('section').forEach(section => {
+    gsap.from(section, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        scrollTrigger: {
+            trigger: section,
+            start: 'top 80%',
+            end: 'bottom 20%',
+            toggleActions: 'play none none reverse'
+        }
     });
-  },
-  { threshold: 0.1 }
-);
+});
 
-sections.forEach((section) => {
-  sectionObserver.observe(section);
+// Animate car cards
+gsap.utils.toArray('.car-card').forEach(card => {
+    gsap.from(card, {
+        opacity: 0,
+        y: 50,
+        duration: 0.5,
+        scrollTrigger: {
+            trigger: card,
+            start: 'top 90%',
+            end: 'bottom 10%',
+            toggleActions: 'play none none reverse'
+        }
+    });
+});
+
+// Parallax scrolling effect for the hero section
+gsap.to('.hero', {
+    backgroundPosition: '50% 100%',
+    ease: 'none',
+    scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+    }
 });
